@@ -9,16 +9,10 @@ buildscript {
 }
 
 plugins {
-    id 'java'
-    id 'java-library'
-    id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'com.jfrog.artifactory' version '4.16.1'
-    id 'signing'
 }
 
 apply plugin: 'java'
-apply plugin: 'java-library'
-apply plugin: 'io.spring.dependency-management'
 apply plugin: 'maven-publish'
 apply plugin: 'maven'
 apply plugin: 'com.jfrog.artifactory'
@@ -30,7 +24,7 @@ repositories {
 }
 
 group = 'com.atlassian'
-version = '0.0.1'
+version = '0.0.2'
 
 dependencies {
 
