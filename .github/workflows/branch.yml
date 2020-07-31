@@ -21,6 +21,8 @@ jobs:
       # Publishes to Artifactory only on push to the "release" branch.
       - name: "Publish"
         env:
+          # The Artifactory secrets are available for all repos in the org,
+          # so you don't have to set them as secrets in your project.
           ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
           ARTIFACTORY_API_KEY: ${{ secrets.ARTIFACTORY_API_KEY }}
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
