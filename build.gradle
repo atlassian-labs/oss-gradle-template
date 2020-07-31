@@ -100,7 +100,7 @@ artifactory {
         contextUrl = 'https://packages.atlassian.com/'
 
         repository {
-            repoKey = 'central'
+            repoKey = 'maven-central'
             username = System.env.ARTIFACTORY_USERNAME
             password = System.env.ARTIFACTORY_API_KEY
         }
