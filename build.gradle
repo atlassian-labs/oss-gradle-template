@@ -24,7 +24,7 @@ repositories {
 }
 
 group = 'com.atlassian'
-version = '0.0.4'
+version = '0.0.7'
 
 dependencies {
 
@@ -107,6 +107,7 @@ artifactory {
         defaults {
             publications('maven')
             publishIvy = false
+            publishBuildInfo = false
         }
     }
 }
