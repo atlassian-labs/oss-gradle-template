@@ -5,6 +5,10 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      id-token: write
     steps:
 
       - name: "Checkout sources"
@@ -18,13 +22,18 @@ jobs:
       - name: "Build"
         run: chmod 755 gradlew && ./gradlew build
 
+        # Populates ARTIFACTORY_USERNAME and ARTIFACTORY_API_KEY with
+        # temporary username/password for publishing to packages.atlassian.com
+      - name: Get publish token
+        id: publish-token
+        if: github.ref == 'refs/heads/release'
+        uses: atlassian-labs/artifact-publish-token@v1.0.1
+        with:
+          output-modes: environment
+
       # Publishes to Artifactory only on push to the "release" branch.
       - name: "Publish"
         env:
-          # The Artifactory secrets are available for all repos in the org,
-          # so you don't have to set them as secrets in your project.
-          ARTIFACTORY_USERNAME: ${{ secrets.ARTIFACTORY_USERNAME }}
-          ARTIFACTORY_API_KEY: ${{ secrets.ARTIFACTORY_API_KEY }}
           SIGNING_KEY: ${{ secrets.SIGNING_KEY }}
           SIGNING_PASSWORD: ${{ secrets.SIGNING_PASSWORD }}
         if: github.ref == 'refs/heads/release'
