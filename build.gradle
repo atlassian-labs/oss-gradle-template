@@ -107,6 +107,8 @@ artifactory {
         defaults {
             publications('maven')
             publishIvy = false
+            // This needs to be "false", otherwise, the artifactory plugin will try to publish
+            // a build info file to Artifactory and fail because we don't have the permissions to do that.
             publishBuildInfo = false
         }
     }
